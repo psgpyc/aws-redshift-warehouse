@@ -6,7 +6,7 @@ This setup is designed for real-world data engineering workloads, enabling data 
 
 <img src="https://raw.githubusercontent.com/psgpyc/aws-redshift-warehouse/master/diagrams/aws_redshift_infra.svg" width="100%" />
 
-## 🧱 Architecture Overview  
+## Architecture Overview  
 
 The infrastructure includes:
 
@@ -20,7 +20,7 @@ The infrastructure includes:
 - Environment separation (dev, prod) via folder structure
 
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```bash
 aws-redshift-infra/
