@@ -4,8 +4,6 @@ This repository provisions a **secure, scalable, production-ready AWS Redshift R
 The infrastructure is modular, environment-specific, and aligned with AWS Well-Architected Framework principles.    
 This setup is designed for real-world data engineering workloads, enabling data ingestion, transformation, and analytics at scale.  
 
-<img width="622" alt="image" src="https://github.com/user-attachments/assets/f33b999a-80e5-401a-b4eb-e3b95395ad6b" />  
-
 <img src="https://raw.githubusercontent.com/psgpyc/aws-redshift-warehouse/master/diagrams/aws_redshift_infra.svg" width="100%" />
 
 ## 🧱 Architecture Overview  
