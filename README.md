@@ -5,7 +5,7 @@ The infrastructure is modular, environment-specific, and aligned with AWS Well-A
 This setup is designed for real-world data engineering workloads, enabling data ingestion, transformation, and analytics at scale.  
 
 <img width="622" alt="image" src="https://github.com/user-attachments/assets/f33b999a-80e5-401a-b4eb-e3b95395ad6b" />
-[infra](diagrams/aws_redshift_infra.svg)
+![infra](diagrams/aws_redshift_infra.svg)
 
 ## 🧱 Architecture Overview  
 
