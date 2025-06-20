@@ -1,11 +1,11 @@
 resource "aws_iam_role" "this" {
     name = "wh-redhsift-assume-role"
-    assume_role_policy = var.wh_redshift_assume_role_policy 
+    assume_role_policy = var.assume_role_policy 
 }
 
 resource "aws_iam_policy" "this" {
     name = "wh-redhsift-access-policy"
-    policy = var.wh_redshift_access_policy
+    policy = var.access_policy
 }
 
 

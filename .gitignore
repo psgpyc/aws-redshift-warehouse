@@ -58,3 +58,5 @@ venv/
 # Secret files (optional—use Git crypt or SOPS instead)
 secrets.yaml
 secrets.json
+
+data/

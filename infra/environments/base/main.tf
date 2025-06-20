@@ -103,3 +103,36 @@ resource "aws_redshift_logging" "this" {
   depends_on = [module.redshift_cluster]
 
 }
+
+
+# aws glue
+
+module "glue_iam_role" {
+  source = "../../modules/iam"
+
+  wh_redshift_assume_role_policy = file("../../policies/glue_iam_role.json")
+
+  wh_redshift_access_policy = templatefile(
+          "../../policies/glue_basic_policies.json.tpl",
+          {
+            bucket_arn = ""
+          }
+          
+        )
+
+}
+
+
+module "glue_job" {
+  source = "../../modules/glue"
+
+  glue_db_name = var.glue_db_name
+  glue_db_description = var.glue_db_description
+  glue_crawler_name = var.glue_crawler_name
+  glue_iam_role = var.glue_iam_role
+
+  table_prefix = var.table_prefix
+
+  s3_target_path = var.s3_target_path
+
+}
