@@ -10,7 +10,7 @@ import pandas as pd
 from pathlib import Path
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
-from connection import get_session_obj
+from boto.connection import get_session_obj
 
 def validate_client(s3c: botocore.client.BaseClient) -> bool:
     """Validate that the provided client is a boto3 S3 client.
@@ -96,11 +96,12 @@ def upload_to_s3(output_filepath: Path, bucket: str, object_name:str = None, cli
     Returns:
         bool: True if upload succeeded, False otherwise.
     """
-    if object_name is None:
-        object_name = f"raw/{output_filepath.name}"
 
     if not isinstance(output_filepath, Path):
         raise TypeError(f"Expected Path for file path, but got {type(output_filepath).__name__}")
+    
+    if object_name is None:
+        object_name = f"raw/{output_filepath.name}"
     
     if bucket is None:
         logging.error("Bucket name is not set.")
