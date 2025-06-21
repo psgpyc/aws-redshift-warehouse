@@ -1,6 +1,7 @@
-# AWS Redshift Infrastructure
+# AWS Redshift Infrastructure with Glue
 
-This repository provisions a **secure, scalable, production-ready AWS Redshift RA3 cluster** using **Terraform**.     
+This repository provisions a **secure, scalable, production-ready AWS Redshift RA3 cluster** using **Terraform**.   
+The setup includes AWS Glue ETL jobs and the Glue Data Catalog to support automated schema discovery, metadata management, and serverless data transformation.  
 The infrastructure is modular, environment-specific, and aligned with AWS Well-Architected Framework principles.    
 This setup is designed for real-world data engineering workloads, enabling data ingestion, transformation, and analytics at scale.  
 
@@ -24,26 +25,33 @@ The infrastructure includes:
 
 ```bash
 aws-redshift-infra/
-├── modules/
-│   ├── vpc/                  # VPC, subnets, NAT, IGW, route tables
-│   ├── security/             # Security groups (Redshift, Bastion)
-│   ├── iam/                  # IAM roles and policies
-│   ├── redshift/             # Redshift cluster, subnet group
-│   ├── ec2/                  # Bastion host configuration
-│   └── s3/                   # S3 bucket for Redshift logs
-├── environments/
-│   ├── dev/                  # Dev environment
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── terraform.tfvars
-│   │   └── backend.tf (optional: remote state)
-│   └── prod/                 # Prod environment (next)
-├── scripts/
-│   └── bastion-setup.sh      # Bastion provisioning script (next: Initially inline with ec2 creation)
-├── policies/
-│    ├── allow_redshift_s3_bucket_policy.json.tpl  # S3 bucket policy for Redshift log writes
-│    ├── redshift_access_policy.json               # Access policy for Redshift IAM role
-│    └── redshift_assume_role_policy.json          # Trust policy for Redshift IAM role
+├── boto/                                # Python utilities for AWS SDK (S3, connection, etc.)
+│   ├── __init__.py
+│   ├── connection.py                    # Boto3 session + client logic
+│   ├── s3.py                            # S3 client upload + validation
+│   └── tests/                           # Unit tests for boto utilities
+│       └── test_s3.py                   # Tests for S3 upload and validation
+├── infra/  
+│     ├── modules/
+│     │   ├── vpc/                  # VPC, subnets, NAT, IGW, route tables
+│     │   ├── security/             # Security groups (Redshift, Bastion)
+│     │   ├── iam/                  # IAM roles and policies
+│     │   ├── redshift/             # Redshift cluster, subnet group
+│     │   ├── ec2/                  # Bastion host configuration
+│     │   ├── s3/                   # S3 bucket
+│     │   ├── glue/                 # Glue bucket
+│     ├── environments/
+│     │   ├── dev/                  # Dev environment
+│     │   │   ├── main.tf
+│     │   │   ├── variables.tf
+│     │   │   ├── terraform.tfvars (git ignored)
+│     │   │   └── backend.tf (git ignored: remote state)
+│     │   └── prod/                 # Prod environment (next)
+│     ├── policies/
+│     │    ├── glue/                                     # Glue policy for ETL
+│     │    ├── allow_redshift_s3_bucket_policy.json.tpl  # S3 bucket policy for Redshift log writes
+│     │    ├── redshift_access_policy.json               # Access policy for Redshift IAM role
+│     │    └── redshift_assume_role_policy.json          # Trust policy for Redshift IAM role
 ├── diagrams/
 │   └── redshift-architecture.svg
 ├── .gitignore
