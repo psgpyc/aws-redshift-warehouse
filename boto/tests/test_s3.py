@@ -94,6 +94,7 @@ def test_upload_to_s3_failure(caplog):
     mock_client.upload_file.assert_called_once_with(output_filepath, "simple-bucket", "raw/file.csv")
     assert result is False
     assert "Error uploading to simple-bucket" in caplog.text
+    
 
 @patch("boto.s3.pd.read_excel")
 @patch("boto.s3.Path.exists")

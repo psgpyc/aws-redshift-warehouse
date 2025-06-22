@@ -55,3 +55,17 @@ module "glue" {
   
 }
 
+
+resource "null_resource" "run_crawler_once" {
+    triggers = {
+      crawler_version = module.glue.glue_crawler_id
+    }
+
+    provisioner "local-exec" {
+        command = "aws --profile sikka --region eu-west-2 glue start-crawler --name ${var.glue_crawler_name}"
+      
+    }
+
+    depends_on = [ module.glue ]
+  
+}

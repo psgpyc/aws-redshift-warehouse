@@ -10,7 +10,7 @@ import pandas as pd
 from pathlib import Path
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
-from boto.connection import get_session_obj
+from connection import get_session_obj
 
 def validate_client(s3c: botocore.client.BaseClient) -> bool:
     """Validate that the provided client is a boto3 S3 client.
